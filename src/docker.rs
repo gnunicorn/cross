@@ -94,7 +94,7 @@ pub fn run(target: &Target,
         .args(&["-v", &format!("{}:/target", target_dir.display())])
         .args(&["-w", "/project"])
         .args(&["-it", &image(toml, target)?])
-        .args(&["sh", "-c", &format!("PATH=$PATH:/rust/bin {:}{:?}", prefix, cmd)])
+        .args(&["sh", "-c", &format!("{:}PATH=$PATH:/rust/bin {:?}", prefix, cmd)])
         .run_and_get_status(verbose)
 }
 
