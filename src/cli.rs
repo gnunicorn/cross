@@ -8,6 +8,7 @@ pub struct Args {
     pub all: Vec<String>,
     pub subcommand: Option<Subcommand>,
     pub target: Option<Target>,
+    pub path: Option<String>,
 }
 
 pub fn parse(target_list: &TargetList) -> Args {
@@ -15,6 +16,7 @@ pub fn parse(target_list: &TargetList) -> Args {
 
     let mut target = None;
     let mut sc = None;
+    let mut path = None;
 
     {
         let mut args = all.iter();
@@ -29,6 +31,10 @@ pub fn parse(target_list: &TargetList) -> Args {
                 target = arg.splitn(2, '=')
                     .nth(1)
                     .map(|s| Target::from(&*s, target_list))
+            } else if arg == "--path" {
+                path = args.next().map(|s| s.to_string());
+            } else if arg.starts_with("--path=") {
+                path = arg.splitn(2, '=').nth(1).map(|s| s.to_string());
             } else if !arg.starts_with('-') && sc.is_none() {
                 sc = Some(Subcommand::from(&**arg));
             }
@@ -39,5 +45,6 @@ pub fn parse(target_list: &TargetList) -> Args {
         all: all,
         subcommand: sc,
         target: target,
+        path: path,
     }
 }

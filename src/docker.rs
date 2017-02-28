@@ -28,6 +28,7 @@ pub fn register(verbose: bool) -> Result<()> {
 pub fn run(target: &Target,
            args: &[String],
            root: &Root,
+           path: Option<String>,
            toml: Option<&Toml>,
            uses_xargo: bool,
            verbose: bool)
@@ -78,6 +79,12 @@ pub fn run(target: &Target,
         docker.args(&["-e", &format!("QEMU_STRACE={}", strace)]);
     }
 
+    let prefix = if let Some(pth) = path {
+            format!("cd {:} && ", pth)
+        } else {
+            "".to_string()
+        };
+
     docker
         .args(&["-e", "XARGO_HOME=/xargo"])
         .args(&["-v", &format!("{}:/xargo", xargo_dir.display())])
@@ -87,7 +94,7 @@ pub fn run(target: &Target,
         .args(&["-v", &format!("{}:/target", target_dir.display())])
         .args(&["-w", "/project"])
         .args(&["-it", &image(toml, target)?])
-        .args(&["sh", "-c", &format!("PATH=$PATH:/rust/bin {:?}", cmd)])
+        .args(&["sh", "-c", &format!("'PATH=$PATH:/rust/bin {:}{:?}'", prefix, cmd)])
         .run_and_get_status(verbose)
 }
 
