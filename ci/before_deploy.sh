@@ -17,4 +17,4 @@ main() {
     rm -rf $td
 }
 
-main
+main	

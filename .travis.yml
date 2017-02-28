@@ -12,8 +12,8 @@ matrix:
     # - env: TARGET=arm-unknown-linux-musleabi                    STD=1                RUN=1
     # - env: TARGET=armv7-unknown-linux-gnueabihf   CPP=1 DYLIB=1 STD=1 OPENSSL=0.5.5  RUN=1
     # - env: TARGET=armv7-unknown-linux-musleabihf                STD=1                RUN=1
-    - env: TARGET=i686-unknown-linux-gnu          CPP=1 DYLIB=1 STD=1 OPENSSL=0.5.5  RUN=1
-    - env: TARGET=i686-unknown-linux-musl                       STD=1                RUN=1
+    # - env: TARGET=i686-unknown-linux-gnu          CPP=1 DYLIB=1 STD=1 OPENSSL=0.5.5  RUN=1
+    # - env: TARGET=i686-unknown-linux-musl                       STD=1                RUN=1
     # - env: TARGET=mips-unknown-linux-gnu          CPP=1 DYLIB=1 STD=1 OPENSSL=0.5.5  RUN=1
     # - env: TARGET=mips64-unknown-linux-gnuabi64   CPP=1 DYLIB=1 STD=1 OPENSSL=0.7.17 RUN=1
     # - env: TARGET=mips64el-unknown-linux-gnuabi64 CPP=1 DYLIB=1 STD=1 OPENSSL=0.7.17 RUN=1
@@ -26,8 +26,8 @@ matrix:
     - env: TARGET=x86_64-unknown-linux-musl                     STD=1 OPENSSL=0.5.5  RUN=1 DEPLOY=1
 
     # OSX
-    - env: TARGET=i686-apple-darwin                     DYLIB=1 STD=1                RUN=1
-      os: osx
+    # - env: TARGET=i686-apple-darwin                     DYLIB=1 STD=1                RUN=1
+    #   os: osx
     - env: TARGET=x86_64-apple-darwin                   DYLIB=1 STD=1                RUN=1 DEPLOY=1
       os: osx
 
